@@ -37,11 +37,28 @@ export default {
       </div>
       <div>
         <label>Sign Type:</label>
-        <input type="text" v-model="newPostParams.sign_type" />
+        <select name="Sign" v-model="newPostParams.sign_type">
+          <option value="Sun">Sun</option>
+          <option value="Moon">Moon</option>
+          <option value="Rising">Rising</option>
+        </select>
       </div>
       <div>
         <label>Sign:</label>
-        <input type="text" v-model="newPostParams.sign" />
+        <select name="Sign" v-model="newPostParams.sign">
+          <option value="Aries">Aries</option>
+          <option value="Taurus">Taurus</option>
+          <option value="Gemini">Gemini</option>
+          <option value="Cancer">Cancer</option>
+          <option value="Leo">Leo</option>
+          <option value="Virgo">Virgo</option>
+          <option value="Libra">Libra</option>
+          <option value="Scorpio">Scorpio</option>
+          <option value="Sagittarius">Sagittarius</option>
+          <option value="Capricorn">Capricorn</option>
+          <option value="Aquarius">Aquarius</option>
+          <option value="Pisces">Pisces</option>
+        </select>
       </div>
       <input type="submit" value="Create" />
     </form>
