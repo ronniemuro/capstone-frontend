@@ -11,6 +11,8 @@
     <router-link to="/logout">Logout</router-link>
     |
     <router-link to="/posts">Feed</router-link>
+    |
+    <router-link to="/posts/new">New Post</router-link>
   </nav>
   <router-view />
 </template>
