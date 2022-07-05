@@ -29,9 +29,9 @@ export default {
     |
     <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
     |
-    <router-link to="/posts">Feed</router-link>
+    <router-link to="/posts" v-if="isLoggedIn">Feed</router-link>
     |
-    <router-link to="/posts/new">New Post</router-link>
+    <router-link to="/posts/new" v-if="isLoggedIn">New Post</router-link>
   </nav>
   <router-view />
 </template>
