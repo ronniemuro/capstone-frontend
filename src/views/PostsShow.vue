@@ -16,6 +16,7 @@ export default {
       console.log(response.data.comments);
       this.comments = response.data.comments;
     });
+    console.log(this.$parent);
   },
   methods: {
     likesToPlural: function () {
@@ -30,6 +31,15 @@ export default {
         console.log("Successfully deleted", response);
         this.$router.push("/posts");
       });
+    },
+    redirectToShow: function () {
+      this.$router.push("/posts");
+    },
+    redirectToEdit: function () {
+      this.$router.push(`/posts/${this.post.id}/edit`);
+    },
+    getUserId: function () {
+      return localStorage.getItem("user_id");
     },
   },
 };
@@ -50,8 +60,10 @@ export default {
       <p>{{ comment.user.name }} @{{ comment.user.username }}</p>
       <p>{{ comment.comment }}</p>
     </div>
-    <p><router-link v-bind:to="`/posts/${post.id}/edit`">Edit Post</router-link></p>
-    <p><button v-on:click="destroyPost(post)">Delete Post</button></p>
+    <div v-if="getUserId() == post.user.id">
+      <p><button v-on:click="redirectToEdit()">Edit Post</button></p>
+      <p><button v-on:click="destroyPost()">Delete Post</button></p>
+    </div>
   </div>
 </template>
 
