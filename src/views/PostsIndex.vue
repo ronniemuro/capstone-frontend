@@ -25,7 +25,11 @@ export default {
   <div class="home">
     <div v-for="post in posts" v-bind:key="post.id">
       <h4>
-        <img v-bind:src="post.user.profile_pic" v-bind:alt="post.user.name" />
+        <img
+          v-bind:src="post.user.profile_pic"
+          v-bind:alt="post.user.name"
+          style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
+        />
         {{ post.user.name }} @{{ post.user.username }}
       </h4>
       <h3>{{ post.post_content }}</h3>
@@ -35,4 +39,8 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  border-radius: 100%;
+}
+</style>
