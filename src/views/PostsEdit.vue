@@ -1,0 +1,74 @@
+<script>
+import axios from "axios";
+
+export default {
+  data: function () {
+    return {
+      post: {},
+      errors: [],
+    };
+  },
+  created: function () {
+    axios.get("/posts/" + this.$route.params.id + ".json").then((response) => {
+      console.log(response.data);
+      this.post = response.data;
+    });
+  },
+  methods: {
+    submit: function () {
+      axios
+        .patch("/posts/" + this.$route.params.id + ".json", this.post)
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push("/posts/" + this.$route.params.id);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
+    },
+  },
+};
+</script>
+
+<template>
+  <div class="new-post">
+    <form v-on:submit.prevent="submit()">
+      <h3>Edit Post</h3>
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
+      <div>
+        <label>How are the planets aligning for you?</label>
+        <input type="text" v-model="post.post_content" />
+      </div>
+      <div>
+        <label>Sign Type:</label>
+        <select name="Sign" v-model="post.sign_type">
+          <option value="Sun">Sun</option>
+          <option value="Moon">Moon</option>
+          <option value="Rising">Rising</option>
+        </select>
+      </div>
+      <div>
+        <label>Sign:</label>
+        <select name="Sign" v-model="post.sign">
+          <option value="Aries">Aries</option>
+          <option value="Taurus">Taurus</option>
+          <option value="Gemini">Gemini</option>
+          <option value="Cancer">Cancer</option>
+          <option value="Leo">Leo</option>
+          <option value="Virgo">Virgo</option>
+          <option value="Libra">Libra</option>
+          <option value="Scorpio">Scorpio</option>
+          <option value="Sagittarius">Sagittarius</option>
+          <option value="Capricorn">Capricorn</option>
+          <option value="Aquarius">Aquarius</option>
+          <option value="Pisces">Pisces</option>
+        </select>
+      </div>
+      <input type="submit" value="Update Post" />
+    </form>
+  </div>
+</template>
+
+<style></style>

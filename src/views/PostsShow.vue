@@ -32,7 +32,7 @@ export default {
 <template>
   <div class="home">
     <h4>
-      <router-link to="/posts">Back</router-link>
+      <p><router-link to="/posts">Back..</router-link></p>
       <img v-bind:src="post.user.profile_pic" v-bind:alt="post.user.name" />
       {{ post.user.name }} @{{ post.user.username }}
     </h4>
@@ -40,9 +40,11 @@ export default {
     <h3>{{ post.sign_type }}: {{ post.sign }}</h3>
     <p>{{ post.likes.length }} {{ likesToPlural() }}</p>
     <div v-for="comment in comments" v-bind:key="comment.id">
+      <h5>Comments</h5>
       <p>{{ comment.user.name }} @{{ comment.user.username }}</p>
       <p>{{ comment.comment }}</p>
     </div>
+    <p><router-link v-bind:to="`/posts/${post.id}/edit`">Edit Post</router-link></p>
   </div>
 </template>
 
