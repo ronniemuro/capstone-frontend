@@ -25,6 +25,12 @@ export default {
         return "Likes";
       }
     },
+    destroyPost: function (post) {
+      axios.delete("/posts/" + post.id + ".json").then((response) => {
+        console.log("Successfully deleted", response);
+        this.$router.push("/posts");
+      });
+    },
   },
 };
 </script>
@@ -45,6 +51,7 @@ export default {
       <p>{{ comment.comment }}</p>
     </div>
     <p><router-link v-bind:to="`/posts/${post.id}/edit`">Edit Post</router-link></p>
+    <p><button v-on:click="destroyPost(post)">Delete Post</button></p>
   </div>
 </template>
 
