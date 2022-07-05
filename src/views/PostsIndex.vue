@@ -30,6 +30,7 @@ export default {
       </h4>
       <h3>{{ post.post_content }}</h3>
       <h3>{{ post.sign_type }}: {{ post.sign }}</h3>
+      <router-link v-bind:to="`/posts/${post.id}`">More...</router-link>
     </div>
   </div>
 </template>
