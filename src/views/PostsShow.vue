@@ -6,6 +6,14 @@ export default {
       post: {},
       likes: [],
       comments: [],
+      newCommentParams: {
+        post_id: this.$route.params.id,
+      },
+      newLikeParams: {
+        post_id: this.$route.params.id,
+      },
+      errorStatus: null,
+      isLiked: false,
     };
   },
   created: function () {
@@ -13,6 +21,10 @@ export default {
       console.log(response.data);
       this.post = response.data;
       this.likes = response.data.likes;
+      const filteredLikes = this.likes.filter((like) => like.user_id == this.getUserId());
+      if (filteredLikes.length > 0) {
+        this.isLiked = true;
+      }
       console.log(response.data.comments);
       this.comments = response.data.comments;
     });
@@ -41,6 +53,28 @@ export default {
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
+    submitComment: function () {
+      axios
+        .post("/comments.json", this.newCommentParams)
+        .then((response) => {
+          console.log(response.data);
+          this.comments.push(response.data);
+          this.newCommentParams.comment = "";
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          console.log(error.response.status);
+          this.errorStatus = error.response.status;
+        });
+    },
+    submitLike: function () {
+      axios.post("/likes.json", this.newLikeParams).then((response) => {
+        console.log(response.data);
+        this.likes.push(response.data);
+        this.newLikeParams = null;
+        this.isLiked = true;
+      });
+    },
   },
 };
 </script>
@@ -58,9 +92,15 @@ export default {
     </h4>
     <h3>{{ post.post_content }}</h3>
     <h3>{{ post.sign_type }}: {{ post.sign }}</h3>
-    <p>{{ post.likes.length }} {{ likesToPlural() }}</p>
+    <div>
+      <p>
+        <button v-on:click="submitLike()" v-bind:disabled="isLiked">♥</button>
+        {{ post.likes.length }} {{ likesToPlural() }}
+      </p>
+    </div>
+
+    <p>Comments:</p>
     <div v-for="comment in comments" v-bind:key="comment.id">
-      <h5>Comments</h5>
       <p>{{ comment.user.name }} @{{ comment.user.username }}</p>
       <p>{{ comment.comment }}</p>
     </div>
@@ -68,6 +108,13 @@ export default {
       <p><button v-on:click="redirectToEdit()">Edit Post</button></p>
       <p><button v-on:click="destroyPost()">Delete Post</button></p>
     </div>
+    <form id="myForm" v-on:submit.prevent="submitComment()">
+      <div>
+        <label>Comment:</label>
+        <input type="text" v-model="newCommentParams.comment" />
+        <input type="submit" value="Post" />
+      </div>
+    </form>
   </div>
 </template>
 
