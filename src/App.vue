@@ -19,10 +19,6 @@ export default {
 </script>
 <template>
   <nav>
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/about">About</router-link>
-    |
     <router-link to="/signup" v-if="!isLoggedIn">Sign Up</router-link>
     |
     <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
@@ -32,6 +28,8 @@ export default {
     <router-link to="/posts" v-if="isLoggedIn">Feed</router-link>
     |
     <router-link to="/posts/new" v-if="isLoggedIn">New Post</router-link>
+    |
+    <router-link to="/users/:id" v-if="isLoggedIn">My Profile</router-link>
   </nav>
   <router-view />
 </template>
