@@ -9,10 +9,11 @@ export default {
       likes: [],
       follower_relationships: [],
       leader_relationships: [],
+      newRelationshipParams: [],
     };
   },
   created: function () {
-    axios.get("/users/" + this.getUserId() + ".json").then((response) => {
+    axios.get("/users/" + this.$route.params.id + ".json").then((response) => {
       console.log(response.data);
       this.user = response.data;
       this.posts = response.data.posts;
@@ -42,6 +43,13 @@ export default {
     submitFollow: function () {
       axios.post();
     },
+    submitFollowRelationship: function () {
+      axios.post("/relationships.json", this.newRelationshipParams).then((response) => {
+        console.log(response.data);
+        this.follower_relationships.push(response.data);
+        this.leader_relationships.push(response.data);
+      });
+    },
   },
 };
 </script>
@@ -58,6 +66,9 @@ export default {
     {{ user.name }}
   </h2>
   <h3>@{{ user.username }}</h3>
+  <div>
+    <button>Follow</button>
+  </div>
   <p>☉: {{ user.sun }} ☾: {{ user.moon }} ↑: {{ user.rising }}</p>
   <p>
     {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
