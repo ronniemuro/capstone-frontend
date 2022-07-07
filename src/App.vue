@@ -19,17 +19,29 @@ export default {
 </script>
 <template>
   <nav>
-    <router-link to="/signup" v-if="!isLoggedIn">Sign Up</router-link>
-    |
-    <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-    |
-    <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
-    |
-    <router-link to="/posts" v-if="isLoggedIn">Feed</router-link>
-    |
-    <router-link to="/posts/new" v-if="isLoggedIn">New Post</router-link>
-    |
-    <router-link to="/users/:id" v-if="isLoggedIn">My Profile</router-link>
+    <div v-if="!isLoggedIn">
+      <router-link to="/signup">Sign Up</router-link>
+      |
+    </div>
+    <div v-if="!isLoggedIn">
+      <router-link to="/login">Login</router-link>
+      |
+    </div>
+    <div v-if="isLoggedIn">
+      <router-link to="/posts">Feed</router-link>
+      |
+    </div>
+    <div v-if="isLoggedIn">
+      <router-link to="/posts/new">New Post</router-link>
+      |
+    </div>
+    <div v-if="isLoggedIn">
+      <router-link v-bind:to="`/users/${getUserId()}`">My Profile</router-link>
+    </div>
+    <div v-if="isLoggedIn">
+      <router-link to="/logout">Logout</router-link>
+      |
+    </div>
   </nav>
   <router-view />
 </template>

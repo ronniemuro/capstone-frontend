@@ -5,16 +5,25 @@ export default {
   data: function () {
     return {
       posts: [],
+      signTypeFilter: "",
     };
   },
   created: function () {
     this.indexPosts();
   },
+
   methods: {
     indexPosts: function () {
       axios.get("/posts.json").then((response) => {
         console.log(response.data);
         this.posts = response.data;
+      });
+    },
+    filterPosts: function () {
+      return this.posts.filter((post) => {
+        var lowerSignType = post.sign_type.toLowerCase();
+        var lowerSignTypeFilter = this.signTypeFilter.toLowerCase();
+        return lowerSignType.includes(lowerSignTypeFilter);
       });
     },
   },
@@ -23,7 +32,15 @@ export default {
 
 <template>
   <div class="home">
-    <div v-for="post in posts" v-bind:key="post.id">
+    <p>
+      Filter by Sign Type:
+      <select name="Sign" v-model="signTypeFilter">
+        <option value="Sun">Sun</option>
+        <option value="Moon">Moon</option>
+        <option value="Rising">Rising</option>
+      </select>
+    </p>
+    <div v-for="post in filterPosts()" v-bind:key="post.id">
       <h4>
         <img
           v-bind:src="post.user.profile_pic"
