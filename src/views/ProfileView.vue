@@ -9,7 +9,10 @@ export default {
       likes: [],
       follower_relationships: [],
       leader_relationships: [],
-      newRelationshipParams: [],
+      newRelationshipParams: {
+        leader_id: this.$route.params.id,
+      },
+      isFollowed: false,
     };
   },
   created: function () {
@@ -20,6 +23,12 @@ export default {
       this.likes = response.data.likes;
       this.follower_relationships = response.data.follower_relationships;
       this.leader_relationships = response.data.leader_relationships;
+      const filteredFollowed = this.follower_relationships.filter(
+        (follower_relationship) => follower_relationship.follower_id == this.getUserId()
+      );
+      if (filteredFollowed.length > 0) {
+        this.isFollowed = true;
+      }
     });
   },
   methods: {
@@ -48,6 +57,7 @@ export default {
         console.log(response.data);
         this.follower_relationships.push(response.data);
         this.leader_relationships.push(response.data);
+        this.isFollowed = true;
       });
     },
   },
@@ -66,8 +76,10 @@ export default {
     {{ user.name }}
   </h2>
   <h3>@{{ user.username }}</h3>
-  <div>
-    <button>Follow</button>
+  <div v-if="getUserId() != user.id">
+    <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed">
+      {{ isFollowed ? "Following" : "Follow" }}
+    </button>
   </div>
   <p>☉: {{ user.sun }} ☾: {{ user.moon }} ↑: {{ user.rising }}</p>
   <p>

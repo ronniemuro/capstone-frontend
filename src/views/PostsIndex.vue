@@ -47,7 +47,7 @@ export default {
           v-bind:alt="post.user.name"
           style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
         />
-        {{ post.user.name }} @{{ post.user.username }}
+        <router-link v-bind:to="`/users/${post.user.id}`">{{ post.user.name }} @{{ post.user.username }}</router-link>
       </h4>
       <h3>{{ post.post_content }}</h3>
       <h3>{{ post.sign_type }}: {{ post.sign }}</h3>

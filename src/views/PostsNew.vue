@@ -20,6 +20,9 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
+    getUserId: function () {
+      return localStorage.getItem("user_id");
+    },
   },
 };
 </script>
