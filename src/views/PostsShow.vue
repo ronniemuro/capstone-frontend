@@ -90,6 +90,7 @@ export default {
       />
       {{ post.user.name }} @{{ post.user.username }}
     </h4>
+
     <h3>{{ post.post_content }}</h3>
     <h3>{{ post.sign_type }}: {{ post.sign }}</h3>
     <div>
@@ -100,21 +101,59 @@ export default {
     </div>
 
     <p>Comments:</p>
-    <div v-for="comment in comments" v-bind:key="comment.id">
-      <p>{{ comment.user.name }} @{{ comment.user.username }}</p>
-      <p>{{ comment.comment }}</p>
+
+    <div v-for="comment in comments" v-bind:key="comment.id" class="d-flex justify-content-center">
+      <div class="comment d-flex">
+        <div class="flex-shrink-0">
+          <div class="avatar avatar-sm rounded-circle">
+            <img class="avatar-img" v-bind:src="post.user.profile_pic" v-bind:alt="post.user.name" />
+          </div>
+        </div>
+        <div class="flex-shrink-1 ms-2 ms-sm-3">
+          <div class="comment-meta d-flex">
+            <h6 class="me-2">{{ comment.user.name }} @{{ comment.user.username }}</h6>
+          </div>
+          <div class="comment-body">
+            {{ comment.comment }}
+          </div>
+          <span class="text-muted">{{ comment.user.created_at }}</span>
+        </div>
+      </div>
     </div>
     <div v-if="getUserId() == post.user.id">
       <p><button v-on:click="redirectToEdit()">Edit Post</button></p>
       <p><button v-on:click="destroyPost()">Delete Post</button></p>
     </div>
-    <form id="myForm" v-on:submit.prevent="submitComment()">
+    <!-- <form id="myForm" v-on:submit.prevent="submitComment()">
       <div>
         <label>Comment:</label>
-        <input type="text" v-model="newCommentParams.comment" />
+        <input type="text" />
         <input type="submit" value="Post" />
       </div>
-    </form>
+    </form> -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-5">
+        <div class="row">
+          <form id="myForm" v-on:submit.prevent="submitComment()">
+            <div class="col-12 mb-3">
+              <label for="comment-message"></label>
+              <textarea
+                class="form-control"
+                id="comment-message"
+                placeholder="Comment"
+                cols="20"
+                rows="3"
+                v-model="newCommentParams.comment"
+              ></textarea>
+            </div>
+            <div class="col-12">
+              <input type="submit" class="btn btn-primary" value="Post comment" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Comments Form -->
   </div>
 </template>
 
