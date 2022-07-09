@@ -13,6 +13,8 @@ export default {
         leader_id: this.$route.params.id,
       },
       isFollowed: false,
+      isSingularLike: 1,
+      isSingularComment: 1,
     };
   },
   created: function () {
@@ -65,38 +67,48 @@ export default {
 </script>
 
 <template>
-  <div class="home"></div>
-  <p>{{ user.posts.length }} Posts</p>
-  <h2>
-    <img
-      v-bind:src="user.profile_pic"
-      v-bind:alt="user.name"
-      style="object-fit: fill; width: 100px; height: 100px; border: solid 1px #ccc"
-    />
-    {{ user.name }}
-  </h2>
-  <h3>@{{ user.username }}</h3>
-  <div v-if="getUserId() != user.id">
-    <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed">
-      {{ isFollowed ? "Following" : "Follow" }}
-    </button>
-  </div>
-  <p>☉: {{ user.sun }} ☾: {{ user.moon }} ↑: {{ user.rising }}</p>
-  <p>
-    {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
-    {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}
-  </p>
-  <div v-for="post in posts" v-bind:key="post.id">
-    <h4>
-      <img
-        v-bind:src="user.profile_pic"
-        v-bind:alt="user.name"
-        style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
-      />
-      {{ user.name }} @{{ user.username }}
-    </h4>
-    <p>{{ post.post_content }}</p>
-    <p>{{ post.sign_type }}: {{ post.sign }}</p>
+  <div class="home">
+    <div id="profile-view" class="d-flex justify-content-center">
+      <div class="col-lg-4 text-center mb-5">
+        <p class="d-block mb-2 text-uppercase">{{ user.posts.length }} Posts</p>
+        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle w-50 mb-4 width: 100px; height: 100px" />
+        <h4>{{ user.name }}</h4>
+        <h4>@{{ user.username }}</h4>
+        <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} ☾: {{ user.moon }} ↑: {{ user.rising }}</span>
+        <span class="d-block mb-3 text-lowercase">
+          {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
+          {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}
+        </span>
+        <div class="d-block mb-5 text-uppercase" v-if="getUserId() != user.id">
+          <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed">
+            {{ isFollowed ? "Following" : "Follow" }}
+          </button>
+        </div>
+        <!-- <p>
+        profile bio
+      </p> -->
+        <div class="d-block mb-3" v-for="post in posts" v-bind:key="post.id">
+          <div class="post-entry-1 border-bottom pt-3">
+            <div class="author mb-0 d-block">
+              <img
+                v-bind:src="user.profile_pic"
+                v-bind:alt="user.name"
+                style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
+              />
+              {{ user.name }} @{{ user.username }}
+            </div>
+            <h2 class="mb-4">
+              <h5>{{ post.post_content }}</h5>
+            </h2>
+            <div class="post-meta mb-4">
+              <span class="date">{{ post.sign_type }}</span>
+              <span class="mx-1">&bullet;</span>
+              <span>{{ post.sign }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

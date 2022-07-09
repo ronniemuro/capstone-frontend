@@ -44,14 +44,16 @@ export default {
     </p>
     <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center">
       <div class="col-md-3">
-        <h4>
+        <h3>
           <img
             v-bind:src="post.user.profile_pic"
             v-bind:alt="post.user.name"
             style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
           />
-          <router-link v-bind:to="`/users/${post.user.id}`">{{ post.user.name }} @{{ post.user.username }}</router-link>
-        </h4>
+          <router-link v-bind:to="`/users/${post.user.id}`" class="btn btn-light btn-lg">
+            {{ post.user.name }} @{{ post.user.username }}
+          </router-link>
+        </h3>
         <div class="post-entry-1 border-bottom">
           <div class="post-meta">
             <span class="date">{{ post.sign_type }}</span>
@@ -59,7 +61,7 @@ export default {
             <span>{{ post.sign }}</span>
           </div>
           <h2 class="mb-2">
-            <h3>{{ post.post_content }}</h3>
+            <h4>{{ post.post_content }}</h4>
           </h2>
           <span class="author mb-3 d-block">
             <h5>
@@ -67,7 +69,7 @@ export default {
               {{ post.comments.length }} {{ post.comments.length == isSingularComment ? "Comment" : "Comments" }}
             </h5>
           </span>
-          <router-link v-bind:to="`/posts/${post.id}`">More...</router-link>
+          <router-link v-bind:to="`/posts/${post.id}`" class="mb-3 btn btn-outline-dark">More...</router-link>
         </div>
       </div>
     </div>

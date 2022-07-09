@@ -46,7 +46,7 @@ export default {
           <option value="Rising">Rising</option>
         </select>
       </div>
-      <div>
+      <div class="dropdown">
         <label>Sign:</label>
         <select name="Sign" v-model="newPostParams.sign">
           <option value="Aries">Aries</option>

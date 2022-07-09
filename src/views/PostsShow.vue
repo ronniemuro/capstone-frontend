@@ -50,6 +50,9 @@ export default {
     redirectToEdit: function () {
       this.$router.push(`/posts/${this.post.id}/edit`);
     },
+    redirectToFeed: function () {
+      this.$router.push("/posts");
+    },
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
@@ -82,27 +85,53 @@ export default {
 <template>
   <div class="home">
     <h4>
-      <p><router-link to="/posts">Back..</router-link></p>
+      <p><button type="button" class="btn btn-light" v-on:click="redirectToFeed()">Back to feed..</button></p>
       <img
         v-bind:src="post.user.profile_pic"
         v-bind:alt="post.user.name"
         style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
       />
-      {{ post.user.name }} @{{ post.user.username }}
+      <router-link v-bind:to="`/users/${post.user.id}`">{{ post.user.name }} @{{ post.user.username }}</router-link>
     </h4>
 
     <h3>{{ post.post_content }}</h3>
-    <h3>{{ post.sign_type }}: {{ post.sign }}</h3>
-    <div>
+    <h4>{{ post.sign_type }}: {{ post.sign }}</h4>
+    <div class="d-block mb-4 mt-4 text-uppercase col-12">
       <p>
-        <button v-on:click="submitLike()" v-bind:disabled="isLiked">♥</button>
+        <button v-on:click="submitLike()" v-bind:disabled="isLiked" class="btn btn-outline-dark">♥</button>
         {{ post.likes.length }} {{ likesToPlural() }}
       </p>
     </div>
+    <div v-if="getUserId() == post.user.id">
+      <button v-on:click="redirectToEdit()" class="btn btn-outline-dark">Edit Post</button>
+      <button v-on:click="destroyPost()" class="btn btn-outline-danger">Delete Post</button>
+    </div>
+    <div class="row justify-content-center mt-1">
+      <div class="col-md-3">
+        <div class="row">
+          <form id="myForm" v-on:submit.prevent="submitComment()">
+            <div class="col-12 mb-3">
+              <label for="comment-message"></label>
+              <textarea
+                class="form-control"
+                id="comment-message"
+                placeholder="Comment"
+                cols="20"
+                rows="1"
+                v-model="newCommentParams.comment"
+              ></textarea>
+            </div>
+            <div class="d-block mb-3 text-uppercase col-12">
+              <input type="submit" class="btn btn-primary" value="Post comment" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-    <p>Comments:</p>
+    <p>COMMENTS:</p>
 
-    <div v-for="comment in comments" v-bind:key="comment.id" class="d-flex justify-content-center">
+    <div v-for="comment in comments" v-bind:key="comment.id" class="d-flex mb-4 justify-content-center">
       <div class="comment d-flex">
         <div class="flex-shrink-0">
           <div class="avatar avatar-sm rounded-circle">
@@ -120,10 +149,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="getUserId() == post.user.id">
-      <p><button v-on:click="redirectToEdit()">Edit Post</button></p>
-      <p><button v-on:click="destroyPost()">Delete Post</button></p>
-    </div>
+
     <!-- <form id="myForm" v-on:submit.prevent="submitComment()">
       <div>
         <label>Comment:</label>
@@ -131,28 +157,7 @@ export default {
         <input type="submit" value="Post" />
       </div>
     </form> -->
-    <div class="row justify-content-center mt-5">
-      <div class="col-lg-5">
-        <div class="row">
-          <form id="myForm" v-on:submit.prevent="submitComment()">
-            <div class="col-12 mb-3">
-              <label for="comment-message"></label>
-              <textarea
-                class="form-control"
-                id="comment-message"
-                placeholder="Comment"
-                cols="20"
-                rows="3"
-                v-model="newCommentParams.comment"
-              ></textarea>
-            </div>
-            <div class="col-12">
-              <input type="submit" class="btn btn-primary" value="Post comment" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+
     <!-- End Comments Form -->
   </div>
 </template>
