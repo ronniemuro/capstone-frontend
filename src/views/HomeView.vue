@@ -10,7 +10,7 @@ export default {
 
 <template>
   <div class="home">
-    <section id="hero-slider" class="hero-slider">
+    <section id="hero-slider" class="hero-slider mt-4 mb-5">
       <div class="container-md" data-aos="fade-in">
         <div class="row">
           <div class="col-12">
@@ -18,16 +18,19 @@ export default {
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <a
-                    href="single-post.html"
+                    href="/signup"
                     class="img-bg d-flex align-items-end"
-                    style="background-image: url('assets/img/post-slide-1.jpg')"
+                    style="background-image: url('assets/img/synastry3.jpg')"
                   >
                     <div class="img-bg-inner">
-                      <h2>Welcome to Synastry</h2>
+                      <h2>Synastry (n)</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                        minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                        repudiandae quidem necessitatibus rem atque.
+                        : comparison between the natal charts of two or more people in order to determine their likely
+                        compatibility and relationship.
+                      </p>
+                      <p>
+                        An app where you can connect with other fellow astrology enthusiasts, and share, discover, and
+                        learn more about the 3 main components in your chart.
                       </p>
                     </div>
                   </a>
@@ -35,16 +38,16 @@ export default {
 
                 <div class="swiper-slide">
                   <a
-                    href="single-post.html"
+                    href="/signup"
                     class="img-bg d-flex align-items-end"
-                    style="background-image: url('assets/img/post-slide-2.jpg')"
+                    style="background-image: url('assets/img/sun4.jpg')"
                   >
                     <div class="img-bg-inner">
-                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
+                      <h2>Your Sun Sign</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                        minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                        repudiandae quidem necessitatibus rem atque.
+                        The sun is your identity. It is the essence that you shine out into the world. It represents the
+                        vital force that drives you to seek the highest expression of your true self. Your sun sign is
+                        how you answer the question “I am” and how you experience life and express your individuality
                       </p>
                     </div>
                   </a>
@@ -52,16 +55,17 @@ export default {
 
                 <div class="swiper-slide">
                   <a
-                    href="single-post.html"
+                    href="/signup"
                     class="img-bg d-flex align-items-end"
-                    style="background-image: url('assets/img/post-slide-3.jpg')"
+                    style="background-image: url('assets/img/moon.jpg')"
                   >
                     <div class="img-bg-inner">
-                      <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
+                      <h2>Your Moon Sign</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                        minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                        repudiandae quidem necessitatibus rem atque.
+                        The moon is the soul behind your identity. It is the subconscious side of yourself that you
+                        typically keep hidden and is the driving force behind your emotional reactions. Your moon sign
+                        helps you feel pleasure and pain, joy and sorrow, and gives insight into how you nurture and
+                        restore yourself.
                       </p>
                     </div>
                   </a>
@@ -69,16 +73,17 @@ export default {
 
                 <div class="swiper-slide">
                   <a
-                    href="single-post.html"
+                    href="/signup"
                     class="img-bg d-flex align-items-end"
-                    style="background-image: url('assets/img/post-slide-4.jpg')"
+                    style="background-image: url('assets/img/rising.jpg')"
                   >
                     <div class="img-bg-inner">
-                      <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
+                      <h2>Your Rising Sign</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                        minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                        repudiandae quidem necessitatibus rem atque.
+                        Your rising sign or ascendant is your external self — the "mask" that people see upon meeting
+                        you. In addition to characterizing your external self, it also tells the story of skills,
+                        talents, and strategies that you'll use as you move through your life path (your sun sign) in
+                        pursuit of your most innate desires (your moon sign).
                       </p>
                     </div>
                   </a>

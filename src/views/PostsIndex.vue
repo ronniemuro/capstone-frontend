@@ -34,14 +34,16 @@ export default {
 
 <template>
   <div class="home">
-    <p>
-      Filter by Sign Type:
-      <select name="Sign" v-model="signTypeFilter">
-        <option value="Sun">Sun</option>
-        <option value="Moon">Moon</option>
-        <option value="Rising">Rising</option>
-      </select>
-    </p>
+    <div class="d-flex justify-content-center">
+      <div class="col-md-2 mb-3">
+        <select class="form-select d-block" required v-model="signTypeFilter">
+          <option value="" disabled selected>Filter by the Big 3</option>
+          <option value="Sun">Sun</option>
+          <option value="Moon">Moon</option>
+          <option value="Rising">Rising</option>
+        </select>
+      </div>
+    </div>
     <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center" data-aos="fade-up">
       <div class="col-md-3">
         <h3>

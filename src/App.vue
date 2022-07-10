@@ -33,35 +33,21 @@ export default {
             <li v-if="isLoggedIn">
               <a href="/posts">Feed</a>
             </li>
-            <li v-if="isLoggedIn"><a href="/posts/new">New Post</a></li>
-            <!-- <li class="dropdown"> -->
-            <!-- <a href="category.html"> -->
-            <!-- <span>Categories</span> -->
+            <!-- <li class="dropdown" v-if="isLoggedIn"> -->
+            <!-- <a href="/posts"> -->
+            <!-- <span>Feed</span> -->
             <!-- <i class="bi bi-chevron-down dropdown-indicator"></i> -->
             <!-- </a> -->
             <!-- <ul> -->
-            <!--  <li><a href="search-result.html">Search Result</a></li> -->
 
-            <!-- <li><a href="#">Drop Down 1</a></li> -->
-            <!-- <li class="dropdown"> -->
-            <!-- <a href="#"> -->
-            <!-- <span>Deep Drop Down</span> -->
-            <!--  <i class="bi bi-chevron-down dropdown-indicator"></i> -->
-
-            <!-- </a> -->
-            <!-- <ul> -->
-            <!-- <li><a href="#">Deep Drop Down 1</a></li> -->
-            <!-- <li><a href="#">Deep Drop Down 2</a></li> -->
-            <!-- <li><a href="#">Deep Drop Down 3</a></li> -->
-            <!-- <li><a href="#">Deep Drop Down 4</a></li> -->
-            <!-- <li><a href="#">Deep Drop Down 5</a></li> -->
+            <!-- <li class="dropdown"></li> -->
+            <!-- <li><a href="/posts">All Posts</a></li> -->
+            <!-- <li><a href="/posts/sun">Sun Posts</a></li> -->
+            <!-- <li><a href="#">Moon Posts</a></li> -->
+            <!-- <li><a href="#">Rising Posts</a></li> -->
             <!-- </ul> -->
             <!-- </li> -->
-            <!-- <li><a href="#">Drop Down 2</a></li> -->
-            <!-- <li><a href="#">Drop Down 3</a></li> -->
-            <!-- <li><a href="#">Drop Down 4</a></li> -->
-            <!-- </ul> -->
-            <!-- </li> -->
+            <li v-if="isLoggedIn"><a href="/posts/new">New Post</a></li>
             <li v-if="isLoggedIn"><router-link v-bind:to="`/users/${getUserId()}`">My Profile</router-link></li>
             <li v-if="isLoggedIn"><a href="/logout">Logout</a></li>
             <li v-if="!isLoggedIn"><a href="/login">Login</a></li>
@@ -93,58 +79,51 @@ export default {
     <footer id="footer" class="footer">
       <div class="footer-content">
         <div class="container">
-          <div class="row g-5">
-            <div class="col-lg-4">
-              <h3 class="footer-heading">About ZenBlog</h3>
+          <div class="row g-3">
+            <div class="col-lg-4" v-if="!isLoggedIn">
+              <h3 class="footer-heading">About Synastry</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti
-                voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid
-                blanditiis omnis quae. Explicabo?
+                Social networking app meant to connect those passionate about astrology. You will be able to connect
+                with others based on what they are posting in regards to either their sun, moon, or rising sign. See how
+                current astrology and planetary positions might be affecting you and others current life.
               </p>
-              <p><a href="about.html" class="footer-link-more">Learn More</a></p>
+              <p><a href="/signup" class="footer-link-more">Sign Up</a></p>
+              <p><a href="/login" class="footer-link-more">Login</a></p>
             </div>
-            <div class="col-6 col-lg-2">
+            <div class="col-6 col-lg-2" v-if="isLoggedIn">
               <h3 class="footer-heading">Navigation</h3>
               <ul class="footer-links list-unstyled">
                 <li>
-                  <a href="index.html">
+                  <a href="/">
                     <i class="bi bi-chevron-right"></i>
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="index.html">
+                  <a href="/posts">
                     <i class="bi bi-chevron-right"></i>
-                    Blog
+                    Feed
                   </a>
                 </li>
                 <li>
-                  <a href="category.html">
+                  <a href="/posts/new">
                     <i class="bi bi-chevron-right"></i>
-                    Categories
+                    New Post
                   </a>
                 </li>
                 <li>
-                  <a href="single-post.html">
-                    <i class="bi bi-chevron-right"></i>
-                    Single Post
-                  </a>
+                  <i class="bi bi-chevron-right"></i>
+                  <router-link v-bind:to="`/users/${getUserId()}`">My Profile</router-link>
                 </li>
                 <li>
-                  <a href="about.html">
+                  <a href="/logout">
                     <i class="bi bi-chevron-right"></i>
-                    About us
-                  </a>
-                </li>
-                <li>
-                  <a href="contact.html">
-                    <i class="bi bi-chevron-right"></i>
-                    Contact
+                    Logout
                   </a>
                 </li>
               </ul>
             </div>
-            <div class="col-6 col-lg-2">
+            <!-- <div class="col-6 col-lg-2">
               <h3 class="footer-heading">Categories</h3>
               <ul class="footer-links list-unstyled">
                 <li>
@@ -196,9 +175,9 @@ export default {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <h3 class="footer-heading">Recent Posts</h3>
 
               <ul class="footer-links footer-blog-entry list-unstyled">
@@ -257,8 +236,8 @@ export default {
                     </div>
                   </a>
                 </li>
-              </ul>
-            </div>
+              </ul> -->
+            <!-- </div> -->
           </div>
         </div>
       </div>
@@ -269,7 +248,7 @@ export default {
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
               <div class="copyright">
                 © Copyright
-                <strong><span>ZenBlog</span></strong>
+                <strong><span>Synastry</span></strong>
                 . All Rights Reserved
               </div>
 
@@ -283,15 +262,15 @@ export default {
               </div>
             </div>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
                 <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
+              </div> -->
+            <!-- </div> -->
           </div>
         </div>
       </div>
