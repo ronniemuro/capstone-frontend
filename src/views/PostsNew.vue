@@ -78,56 +78,38 @@ export default {
               <ul>
                 <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
               </ul>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="mr-3">The Big 3:</label>
-                    </div>
-                    <select
-                      name="Sign Type"
-                      v-model="newPostParams.sign_type"
-                      class="form-select"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option value="Sun">Sun</option>
-                      <option value="Moon">Moon</option>
-                      <option value="Rising">Rising</option>
-                    </select>
-                  </div>
+              <div class="row g-1 mb-4">
+                <div class="form-floating col-md-6">
+                  <select class="form-select" id="floatingSelectGrid" v-model="newPostParams.sign_type">
+                    <option value="Sun">Sun</option>
+                    <option value="Moon">Moon</option>
+                    <option value="Rising">Rising</option>
+                  </select>
+                  <label for="floatingSelectGrid">Which of the Big 3?</label>
                 </div>
-                <div class="form-group col-lg">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="mr-3">Sign:</label>
-                    </div>
-                    <select
-                      name="Sign"
-                      v-model="newPostParams.sign"
-                      class="form-select"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option value="Aries">Aries</option>
-                      <option value="Taurus">Taurus</option>
-                      <option value="Gemini">Gemini</option>
-                      <option value="Cancer">Cancer</option>
-                      <option value="Leo">Leo</option>
-                      <option value="Virgo">Virgo</option>
-                      <option value="Libra">Libra</option>
-                      <option value="Scorpio">Scorpio</option>
-                      <option value="Sagittarius">Sagittarius</option>
-                      <option value="Capricorn">Capricorn</option>
-                      <option value="Aquarius">Aquarius</option>
-                      <option value="Pisces">Pisces</option>
-                    </select>
-                  </div>
+                <div class="form-floating col-md-6">
+                  <select class="form-select" v-model="newPostParams.sign" id="floatingSelectGrid">
+                    <option value="Aries">Aries</option>
+                    <option value="Taurus">Taurus</option>
+                    <option value="Gemini">Gemini</option>
+                    <option value="Cancer">Cancer</option>
+                    <option value="Leo">Leo</option>
+                    <option value="Virgo">Virgo</option>
+                    <option value="Libra">Libra</option>
+                    <option value="Scorpio">Scorpio</option>
+                    <option value="Sagittarius">Sagittarius</option>
+                    <option value="Capricorn">Capricorn</option>
+                    <option value="Aquarius">Aquarius</option>
+                    <option value="Pisces">Pisces</option>
+                  </select>
+                  <label for="floatingSelectGrid">Sign</label>
                 </div>
               </div>
               <div class="form-group">
                 <textarea
                   class="form-control"
                   name="message"
-                  rows="5"
+                  rows="4"
                   placeholder="How are the planets aligning for you today?"
                   v-model="newPostParams.post_content"
                 ></textarea>

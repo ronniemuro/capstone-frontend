@@ -42,7 +42,7 @@ export default {
         <option value="Rising">Rising</option>
       </select>
     </p>
-    <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center">
+    <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center" data-aos="fade-up">
       <div class="col-md-3">
         <h3>
           <img

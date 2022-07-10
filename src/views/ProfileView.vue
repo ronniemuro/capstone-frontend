@@ -68,7 +68,7 @@ export default {
 
 <template>
   <div class="home">
-    <div id="profile-view" class="d-flex justify-content-center">
+    <div id="profile-view" class="d-flex justify-content-center" data-aos="fade-up">
       <div class="col-lg-4 text-center mb-5">
         <p class="d-block mb-2 text-uppercase">{{ user.posts.length }} Posts</p>
         <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle w-50 mb-4 width: 100px; height: 100px" />
