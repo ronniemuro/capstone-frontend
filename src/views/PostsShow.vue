@@ -38,8 +38,8 @@ export default {
         return "Likes";
       }
     },
-    destroyPost: function (post) {
-      axios.delete("/posts/" + post.id + ".json").then((response) => {
+    destroyPost: function () {
+      axios.delete("/posts/" + this.post.id + ".json").then((response) => {
         console.log("Successfully deleted", response);
         this.$router.push("/posts");
       });

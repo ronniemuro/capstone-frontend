@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <div class="new-post">
+  <div id="update-post">
     <!-- <form v-on:submit.prevent="submit()">
       <h3>Edit Post</h3>
       <ul>
@@ -138,7 +138,7 @@ export default {
 </template>
 
 <style>
-.new-post {
-  padding-top: 80px;
+.update-post {
+  padding-top: 0px;
 }
 </style>
