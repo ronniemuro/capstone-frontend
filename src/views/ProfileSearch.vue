@@ -4,6 +4,7 @@ export default {
   data: function () {
     return {
       users: [],
+      isLoggedIn: false,
     };
   },
   props: ["searchTerm"],
@@ -13,6 +14,9 @@ export default {
   watch: {
     searchTerm() {
       this.indexUsers();
+    },
+    $route: function () {
+      this.isLoggedIn = !!localStorage.jwt;
     },
   },
   methods: {

@@ -45,6 +45,13 @@ export default {
         this.$router.push("/posts");
       });
     },
+    destroyLike: function () {
+      axios.delete("/likes/" + this.filteredLikes.id + ".json").then((response) => {
+        console.log("Unliked", response);
+        this.$router.push("/posts");
+        this.isLiked = false;
+      });
+    },
     redirectToShow: function () {
       this.$router.push("/posts");
     },
@@ -98,14 +105,16 @@ export default {
         </router-link>
       </h4>
 
-      <h3>{{ post.post_content }}</h3>
-      <h4>{{ post.sign_type }}: {{ post.sign }}</h4>
+      <h2>{{ post.post_content }}</h2>
+      <h5>{{ post.sign_type }}: {{ post.sign }}</h5>
       <div class="d-block mt-4 text-uppercase col-12">
-        <p class="mb-0">
-          <button v-on:click="submitLike()" v-bind:disabled="isLiked" class="btn btn-outline-dark">♥</button>
+        <p class="mb-3">
+          <button v-on:click="submitLike()" v-bind:disabled="isLiked" class="btn btn-outline-danger">♥</button>
           {{ post.likes.length }} {{ likesToPlural() }}
+          <!-- <button v-on:click="destroyLike()" v-if="isLiked" class="btn btn-outline-dark">💔</button> -->
         </p>
       </div>
+
       <div v-if="getUserId() == post.user.id" class="col-sm">
         <button v-on:click="redirectToEdit()" class="btn btn-outline-dark">Edit Post</button>
         <button v-on:click="destroyPost()" class="btn btn-outline-danger">Delete Post</button>
