@@ -6,12 +6,23 @@ export default {
     return {
       newUserParams: {},
       errors: [],
+      imageFile: "",
     };
   },
   methods: {
     submit: function () {
+      var formData = new FormData();
+      formData.append("name", this.newUserParams.name);
+      formData.append("username", this.newUserParams.username);
+      formData.append("email", this.newUserParams.email);
+      formData.append("password", this.newUserParams.password);
+      formData.append("password_confirmation", this.newUserParams.password_confirmation);
+      formData.append("image_file", this.imageFile);
+      formData.append("sun", this.newUserParams.sun);
+      formData.append("moon", this.newUserParams.moon);
+      formData.append("rising", this.newUserParams.rising);
       axios
-        .post("/users", this.newUserParams)
+        .post("/users", formData)
         .then((response) => {
           console.log(response.data);
           this.$router.push("/login");
@@ -31,106 +42,17 @@ export default {
       }
       return false;
     },
+    setFile: function (event) {
+      if (event.target.files.length > 0) {
+        this.imageFile = event.target.files[0];
+      }
+    },
   },
 };
 </script>
 
 <template>
   <div class="signup">
-    <!-- <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>Name:</label>
-        <input type="text" v-model="newUserParams.name" />
-      </div>
-      <div>
-        <label>Username:</label>
-        <input type="text" v-model="newUserParams.username" />
-        <p v-if="newUserParams.username">
-          <small>{{ 20 - newUserParams.username.length }} characters remaining</small>
-        </p>
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" v-model="newUserParams.email" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="newUserParams.password" />
-        <p v-if="newUserParams.password && newUserParams.password.length < 6">
-          <small class="text-danger">Must be at least 6 characters</small>
-        </p>
-        <p v-if="newUserParams.password && newUserParams.password.length > 20">
-          <small class="text-danger">Cannot exceed 20 characters</small>
-        </p>
-      </div>
-      <div>
-        <label>Password confirmation:</label>
-        <input type="password" v-model="newUserParams.password_confirmation" />
-        <p v-if="newUserParams.password && newUserParams.password !== newUserParams.password_confirmation">
-          <small class="text-danger">Must match password</small>
-        </p>
-      </div>
-      <div>
-        <label>Profile Picture:</label>
-        <input type="url" v-model="newUserParams.profile_pic" />
-      </div>
-      <div>
-        <label>Sun:</label>
-        <select name="Sun" v-model="newUserParams.sun">
-          <option value="Aries">Aries</option>
-          <option value="Taurus">Taurus</option>
-          <option value="Gemini">Gemini</option>
-          <option value="Cancer">Cancer</option>
-          <option value="Leo">Leo</option>
-          <option value="Virgo">Virgo</option>
-          <option value="Libra">Libra</option>
-          <option value="Scorpio">Scorpio</option>
-          <option value="Sagittarius">Sagittarius</option>
-          <option value="Capricorn">Capricorn</option>
-          <option value="Aquarius">Aquarius</option>
-          <option value="Pisces">Pisces</option>
-        </select>
-      </div>
-      <div>
-        <label>Moon:</label>
-        <select name="Moon" v-model="newUserParams.moon">
-          <option value="Aries">Aries</option>
-          <option value="Taurus">Taurus</option>
-          <option value="Gemini">Gemini</option>
-          <option value="Cancer">Cancer</option>
-          <option value="Leo">Leo</option>
-          <option value="Virgo">Virgo</option>
-          <option value="Libra">Libra</option>
-          <option value="Scorpio">Scorpio</option>
-          <option value="Sagittarius">Sagittarius</option>
-          <option value="Capricorn">Capricorn</option>
-          <option value="Aquarius">Aquarius</option>
-          <option value="Pisces">Pisces</option>
-        </select>
-      </div>
-      <div>
-        <label>Rising:</label>
-        <select name="Rising" v-model="newUserParams.rising">
-          <option value="Aries">Aries</option>
-          <option value="Taurus">Taurus</option>
-          <option value="Gemini">Gemini</option>
-          <option value="Cancer">Cancer</option>
-          <option value="Leo">Leo</option>
-          <option value="Virgo">Virgo</option>
-          <option value="Libra">Libra</option>
-          <option value="Scorpio">Scorpio</option>
-          <option value="Sagittarius">Sagittarius</option>
-          <option value="Capricorn">Capricorn</option>
-          <option value="Aquarius">Aquarius</option>
-          <option value="Pisces">Pisces</option>
-        </select>
-      </div>
-      <input type="submit" value="Submit" v-bind:disabled="isError()" />
-    </form> -->
     <section id="contact" class="contact mb-5">
       <div class="container" data-aos="fade-up">
         <div class="row">
@@ -223,13 +145,14 @@ export default {
             </div>
             <div class="form-group">
               <input
-                type="url"
+                type="file"
                 class="form-control"
                 name="subject"
                 id="subject"
                 placeholder="Profile Picture"
                 required
-                v-model="newUserParams.profile_pic"
+                v-on:change="setFile($event)"
+                ref="fileInput"
               />
             </div>
             <div class="row g-1">
@@ -293,7 +216,9 @@ export default {
               <div class="error-message"></div>
               <div class="sent-message">You are signed up!</div>
             </div>
-            <div class="text-center"><button type="submit" v-bind:disabled="isError()">Sign Up</button></div>
+            <div class="text-center">
+              <input type="submit" value="Sign Up" v-bind:disabled="isError()" />
+            </div>
           </form>
         </div>
         <!-- End Contact Form -->

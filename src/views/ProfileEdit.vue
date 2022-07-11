@@ -5,6 +5,7 @@ export default {
     return {
       user: {},
       errors: [],
+      imageFile: "",
     };
   },
   created: function () {
@@ -15,8 +16,16 @@ export default {
   },
   methods: {
     submit: function () {
+      var formData = new FormData();
+      formData.append("name", this.user.name);
+      formData.append("username", this.user.username);
+      formData.append("email", this.user.email);
+      formData.append("image_file", this.imageFile);
+      formData.append("sun", this.user.sun);
+      formData.append("moon", this.user.moon);
+      formData.append("rising", this.user.rising);
       axios
-        .patch("/users/" + this.$route.params.id + ".json", this.user)
+        .patch("/users/" + this.$route.params.id + ".json", formData)
         .then((response) => {
           console.log(response.data);
           this.$router.push("/users/" + this.$route.params.id);
@@ -35,6 +44,11 @@ export default {
         return true;
       }
       return false;
+    },
+    setFile: function (event) {
+      if (event.target.files.length > 0) {
+        this.imageFile = event.target.files[0];
+      }
     },
   },
 };
@@ -102,13 +116,14 @@ export default {
 
             <div class="form-group">
               <input
-                type="url"
+                type="file"
                 class="form-control"
                 name="subject"
                 id="subject"
                 placeholder="Profile Picture"
                 required
-                v-model="user.profile_pic"
+                v-on:change="setFile($event)"
+                ref="fileInput"
               />
             </div>
             <div class="row g-1">
@@ -172,7 +187,9 @@ export default {
               <div class="error-message"></div>
               <div class="sent-message">Updated!</div>
             </div>
-            <div class="text-center"><button type="submit" v-bind:disabled="isError()">Update Profile</button></div>
+            <div class="text-center">
+              <input type="submit" value="Update Profile" v-bind:disabled="isError()" />
+            </div>
           </form>
         </div>
         <!-- End Contact Form -->

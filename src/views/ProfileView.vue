@@ -6,6 +6,7 @@ export default {
     return {
       user: [],
       posts: [],
+      post: {},
       likes: [],
       follower_relationships: [],
       leader_relationships: [],
@@ -23,6 +24,7 @@ export default {
       console.log(response.data);
       this.user = response.data;
       this.posts = response.data.posts;
+      this.post = response.data;
       this.likes = response.data.likes;
       this.follower_relationships = response.data.follower_relationships;
       this.leader_relationships = response.data.leader_relationships;
@@ -65,6 +67,15 @@ export default {
         this.leader_relationships.push(response.data);
         this.isFollowed = true;
       });
+    },
+    destroyPost: function () {
+      axios.delete("/posts/" + this.post.id + ".json").then((response) => {
+        console.log("Successfully deleted", response);
+        this.$router.push(`/users/${this.user.id}`);
+      });
+    },
+    redirectToEdit: function () {
+      this.$router.push(`/posts/${this.post.id}/edit`);
     },
   },
 };
@@ -113,6 +124,10 @@ export default {
               <span class="date">{{ post.sign_type }}</span>
               <span class="mx-1">&bullet;</span>
               <span>{{ post.sign }}</span>
+            </div>
+            <div v-if="getUserId() == user.id" class="col-sm mb-3">
+              <button v-on:click="redirectToEdit()" class="btn btn-outline-dark">Edit Post</button>
+              <button v-on:click="destroyPost()" class="btn btn-outline-danger">Delete Post</button>
             </div>
           </div>
         </div>

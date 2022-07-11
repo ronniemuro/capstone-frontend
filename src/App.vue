@@ -60,7 +60,7 @@ export default {
             <a href="" class="mx-2 js-search-open"><span class="bi-search"></span></a>
             <i class="bi bi-list mobile-nav-toggle"></i>
 
-            <!-- ======= Search Form ======= -->
+            <!-- ======= Search Form ======= v-bind -->
             <div class="search-form-wrap js-search-form-wrap">
               <form action="" class="search-form">
                 <span class="icon bi-search"></span>
