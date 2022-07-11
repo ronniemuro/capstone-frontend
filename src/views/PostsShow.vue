@@ -91,15 +91,17 @@ export default {
         <img
           v-bind:src="post.user.profile_pic"
           v-bind:alt="post.user.name"
-          style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
+          style="object-fit: fill; width: 90px; height: 80px; border: solid 1px #ccc"
         />
-        <router-link v-bind:to="`/users/${post.user.id}`">{{ post.user.name }} @{{ post.user.username }}</router-link>
+        <router-link v-bind:to="`/users/${post.user.id}`" class="btn btn-light btn-lg">
+          {{ post.user.name }} @{{ post.user.username }}
+        </router-link>
       </h4>
 
       <h3>{{ post.post_content }}</h3>
       <h4>{{ post.sign_type }}: {{ post.sign }}</h4>
-      <div class="d-block mb-4 mt-4 text-uppercase col-12">
-        <p>
+      <div class="d-block mt-4 text-uppercase col-12">
+        <p class="mb-0">
           <button v-on:click="submitLike()" v-bind:disabled="isLiked" class="btn btn-outline-dark">♥</button>
           {{ post.likes.length }} {{ likesToPlural() }}
         </p>

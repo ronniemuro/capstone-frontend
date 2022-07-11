@@ -89,31 +89,31 @@ export default {
           {{ user.posts.length }} {{ user.posts.length == isSingularPost ? "Post" : "Posts" }}
         </p>
         <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle w-50 mb-4 width: 100px; height: 100px" />
-        <h4>{{ user.name }}</h4>
-        <h4>@{{ user.username }}</h4>
+        <h3>{{ user.name }}</h3>
+        <h3>@{{ user.username }}</h3>
         <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising }}</span>
         <span class="d-block mb-3 text-lowercase">
           {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
           {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}
         </span>
-        <div class="d-block mb-2 text-uppercase" v-if="getUserId() != user.id">
-          <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed">
+        <div class="d-block mb-5 text-uppercase" v-if="getUserId() != user.id">
+          <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed" class="btn btn-outline-dark">
             {{ isFollowed ? "Following" : "Follow" }}
           </button>
         </div>
-        <div v-if="getUserId() == user.id" class="col-sm">
+        <div v-if="getUserId() == user.id" class="col-sm mb-4">
           <button v-on:click="redirectToEditProfile()" class="btn btn-outline-dark">Edit Profile</button>
         </div>
         <!-- <p>
         profile bio
       </p> -->
-        <div class="d-block mb-3" v-for="post in posts" v-bind:key="post.id">
-          <div class="post-entry-1 border-bottom pt-3">
+        <div class="d-block mb-2" v-for="post in posts" v-bind:key="post.id">
+          <div class="post-entry-1 border-bottom">
             <div class="author mb-0 d-block">
               <img
                 v-bind:src="user.profile_pic"
                 v-bind:alt="user.name"
-                style="object-fit: fill; width: 60px; height: 50px; border: solid 1px #ccc"
+                style="object-fit: fill; width: 50px; height: 50px; border: solid 1px #ccc"
               />
               {{ user.name }} @{{ user.username }}
             </div>

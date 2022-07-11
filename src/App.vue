@@ -3,6 +3,7 @@ export default {
   data: function () {
     return {
       isLoggedIn: false,
+      search: "",
     };
   },
   watch: {
@@ -13,6 +14,9 @@ export default {
   methods: {
     getUserId: function () {
       return localStorage.getItem("user_id");
+    },
+    runSearch: function () {
+      this.$router.push(`/users/search?search=${this.search}`);
     },
   },
 };
@@ -62,10 +66,18 @@ export default {
 
             <!-- ======= Search Form ======= v-bind -->
             <div class="search-form-wrap js-search-form-wrap">
-              <form action="" class="search-form">
+              <form v-on:submit.prevent="runSearch()" class="search-form">
                 <span class="icon bi-search"></span>
-                <input type="text" placeholder="Search" class="form-control" />
-                <button class="btn js-search-close"><span class="bi-x"></span></button>
+                <input
+                  v-model="search"
+                  v-on:keyup.enter="runSearch()"
+                  type="text"
+                  placeholder="Find New Friends :)"
+                  class="form-control"
+                />
+                <button class="btn js-search-close">
+                  <span class="bi-x"></span>
+                </button>
               </form>
             </div>
           </div>
@@ -74,7 +86,7 @@ export default {
       </div>
     </header>
     <!-- End Header -->
-    <router-view class="router" />
+    <router-view class="router" v-bind:searchTerm="search" />
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
