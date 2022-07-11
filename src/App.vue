@@ -24,7 +24,7 @@ export default {
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
-          <img src="assets/img/logo.png" alt="" />
+          <!-- <img src="assets/img/logo.png" alt="" /> -->
           <h1>Synastry</h1>
         </a>
 
@@ -55,18 +55,19 @@ export default {
           </ul>
         </nav>
         <!-- .navbar -->
+        <div>
+          <div class="position-relative">
+            <a href="" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+            <i class="bi bi-list mobile-nav-toggle"></i>
 
-        <div class="position-relative">
-          <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-
-          <!-- ======= Search Form ======= -->
-          <div class="search-form-wrap js-search-form-wrap">
-            <form action="search-result.html" class="search-form">
-              <span class="icon bi-search"></span>
-              <input type="text" placeholder="Search" class="form-control" />
-              <button class="btn js-search-close"><span class="bi-x"></span></button>
-            </form>
+            <!-- ======= Search Form ======= -->
+            <div class="search-form-wrap js-search-form-wrap">
+              <form action="" class="search-form">
+                <span class="icon bi-search"></span>
+                <input type="text" placeholder="Search" class="form-control" />
+                <button class="btn js-search-close"><span class="bi-x"></span></button>
+              </form>
+            </div>
           </div>
           <!-- End Search Form -->
         </div>

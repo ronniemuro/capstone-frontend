@@ -15,6 +15,7 @@ export default {
       isFollowed: false,
       isSingularLike: 1,
       isSingularComment: 1,
+      isSingularPost: 1,
     };
   },
   created: function () {
@@ -54,6 +55,9 @@ export default {
     submitFollow: function () {
       axios.post();
     },
+    redirectToEditProfile: function () {
+      this.$router.push(`/users/${this.user.id}/edit`);
+    },
     submitFollowRelationship: function () {
       axios.post("/relationships.json", this.newRelationshipParams).then((response) => {
         console.log(response.data);
@@ -70,19 +74,24 @@ export default {
   <div class="home">
     <div id="profile-view" class="d-flex justify-content-center" data-aos="fade-up">
       <div class="col-lg-4 text-center mb-5">
-        <p class="d-block mb-2 text-uppercase">{{ user.posts.length }} Posts</p>
+        <p class="d-block mb-2 text-uppercase">
+          {{ user.posts.length }} {{ user.posts.length == isSingularPost ? "Post" : "Posts" }}
+        </p>
         <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle w-50 mb-4 width: 100px; height: 100px" />
         <h4>{{ user.name }}</h4>
         <h4>@{{ user.username }}</h4>
-        <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} ☾: {{ user.moon }} ↑: {{ user.rising }}</span>
+        <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising }}</span>
         <span class="d-block mb-3 text-lowercase">
           {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
           {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}
         </span>
-        <div class="d-block mb-5 text-uppercase" v-if="getUserId() != user.id">
+        <div class="d-block mb-2 text-uppercase" v-if="getUserId() != user.id">
           <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed">
             {{ isFollowed ? "Following" : "Follow" }}
           </button>
+        </div>
+        <div v-if="getUserId() == user.id" class="col-sm">
+          <button v-on:click="redirectToEditProfile()" class="btn btn-outline-dark">Edit Profile</button>
         </div>
         <!-- <p>
         profile bio

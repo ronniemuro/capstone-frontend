@@ -8,6 +8,7 @@ import PostsNew from "../views/PostsNew.vue";
 import PostsShow from "../views/PostsShow.vue";
 import PostsEdit from "../views/PostsEdit.vue";
 import ProfileView from "../views/ProfileView.vue";
+import ProfileEdit from "../views/ProfileEdit.vue";
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
     path: "/users/:id",
     name: "users-show",
     component: ProfileView,
+  },
+  {
+    path: "/users/:id/edit",
+    name: "users-edit",
+    component: ProfileEdit,
   },
   {
     path: "/about",

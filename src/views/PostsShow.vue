@@ -14,6 +14,7 @@ export default {
       },
       errorStatus: null,
       isLiked: false,
+      isSingularComment: 1,
     };
   },
   created: function () {
@@ -130,7 +131,7 @@ export default {
         </div>
       </div>
 
-      <p>COMMENTS:</p>
+      <p>{{ post.comments.length }} {{ post.comments.length == isSingularComment ? "Comment:" : "Comments:" }}</p>
 
       <div v-for="comment in comments" v-bind:key="comment.id" class="d-flex mb-4 justify-content-center">
         <div class="comment d-flex">
