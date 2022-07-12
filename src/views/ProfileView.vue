@@ -5,11 +5,6 @@ export default {
   data: function () {
     return {
       user: [],
-      posts: [],
-      post: {},
-      likes: [],
-      follower_relationships: [],
-      leader_relationships: [],
       newRelationshipParams: {
         leader_id: this.$route.params.id,
       },
@@ -17,21 +12,18 @@ export default {
       isSingularLike: 1,
       isSingularComment: 1,
       isSingularPost: 1,
+      filteredRelationship: [],
     };
   },
   created: function () {
     axios.get("/users/" + this.$route.params.id + ".json").then((response) => {
       console.log(response.data);
       this.user = response.data;
-      this.posts = response.data.posts;
-      this.post = response.data;
-      this.likes = response.data.likes;
-      this.follower_relationships = response.data.follower_relationships;
-      this.leader_relationships = response.data.leader_relationships;
-      const filteredFollowed = this.follower_relationships.filter(
+      this.filteredRelationship = this.user.follower_relationships.filter(
         (follower_relationship) => follower_relationship.follower_id == this.getUserId()
       );
-      if (filteredFollowed.length > 0) {
+      console.log(this.filteredRelationship);
+      if (this.filteredRelationship.length > 0) {
         this.isFollowed = true;
       }
     });
@@ -62,10 +54,19 @@ export default {
     },
     submitFollowRelationship: function () {
       axios.post("/relationships.json", this.newRelationshipParams).then((response) => {
-        console.log(response.data);
-        this.follower_relationships.push(response.data);
-        this.leader_relationships.push(response.data);
+        console.log("Followed successfully", response.data);
+        this.user.follower_relationships.push(response.data);
         this.isFollowed = true;
+        this.filteredRelationship[0] = response.data;
+      });
+    },
+    destroyFollowRelationship: function () {
+      axios.delete("/relationships/" + this.filteredRelationship[0].id + ".json").then((response) => {
+        console.log("Unfollowed", response);
+        this.isFollowed = false;
+        this.user.follower_relationships = this.user.follower_relationships.filter((follower_relationship) => {
+          return follower_relationship.id !== this.filteredRelationship[0].id;
+        });
       });
     },
     destroyPost: function () {
@@ -97,8 +98,11 @@ export default {
           {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}
         </span>
         <div class="d-block mb-5 text-uppercase" v-if="getUserId() != user.id">
-          <button v-on:click="submitFollowRelationship()" v-bind:disabled="isFollowed" class="btn btn-outline-dark">
-            {{ isFollowed ? "Following" : "Follow" }}
+          <button v-on:click="submitFollowRelationship()" v-if="!isFollowed" class="btn btn-outline-dark">
+            Follow
+          </button>
+          <button v-on:click="destroyFollowRelationship()" v-if="isFollowed" class="btn btn-outline-dark">
+            Unfollow
           </button>
         </div>
         <div v-if="getUserId() == user.id" class="col-sm mb-4">
