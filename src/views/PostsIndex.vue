@@ -6,6 +6,7 @@ export default {
     return {
       posts: [],
       signTypeFilter: "",
+      signFilter: "",
       isSingularLike: 1,
       isSingularComment: 1,
     };
@@ -25,7 +26,17 @@ export default {
       return this.posts.filter((post) => {
         var lowerSignType = post.sign_type.toLowerCase();
         var lowerSignTypeFilter = this.signTypeFilter.toLowerCase();
-        return lowerSignType.includes(lowerSignTypeFilter);
+        var lowerSign = post.sign.toLowerCase();
+        var lowerSignFilter = this.signFilter.toLowerCase();
+        if (this.signTypeFilter && this.signFilter) {
+          return lowerSignType.includes(lowerSignTypeFilter) && lowerSign.includes(lowerSignFilter);
+        } else if (this.signTypeFilter) {
+          return lowerSignType.includes(lowerSignTypeFilter);
+        } else if (this.signFilter) {
+          return lowerSign.includes(lowerSignFilter);
+        } else {
+          return true;
+        }
       });
     },
   },
@@ -41,6 +52,21 @@ export default {
           <option value="Sun">Sun</option>
           <option value="Moon">Moon</option>
           <option value="Rising">Rising</option>
+        </select>
+        <select class="form-select d-block" required v-model="signFilter">
+          <option value="" disabled selected>Filter by Sign</option>
+          <option value="Aries">Aries</option>
+          <option value="Taurus">Taurus</option>
+          <option value="Gemini">Gemini</option>
+          <option value="Cancer">Cancer</option>
+          <option value="Leo">Leo</option>
+          <option value="Virgo">Virgo</option>
+          <option value="Libra">Libra</option>
+          <option value="Scorpio">Scorpio</option>
+          <option value="Sagittarius">Sagittarius</option>
+          <option value="Capricorn">Capricorn</option>
+          <option value="Aquarius">Aquarius</option>
+          <option value="Pisces">Pisces</option>
         </select>
       </div>
     </div>

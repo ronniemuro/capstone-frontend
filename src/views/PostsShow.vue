@@ -4,8 +4,6 @@ export default {
   data: function () {
     return {
       post: {},
-      likes: [],
-      comments: [],
       newCommentParams: {
         post_id: this.$route.params.id,
       },
@@ -15,19 +13,18 @@ export default {
       errorStatus: null,
       isLiked: false,
       isSingularComment: 1,
+      filteredLikes: [],
     };
   },
   created: function () {
     axios.get("/posts/" + this.$route.params.id + ".json").then((response) => {
       console.log(response.data);
       this.post = response.data;
-      this.likes = response.data.likes;
-      const filteredLikes = this.likes.filter((like) => like.user_id == this.getUserId());
-      if (filteredLikes.length > 0) {
+      this.filteredLikes = this.post.likes.filter((like) => like.user_id == this.getUserId());
+      console.log(this.filteredLikes);
+      if (this.filteredLikes.length > 0) {
         this.isLiked = true;
       }
-      console.log(response.data.comments);
-      this.comments = response.data.comments;
     });
     console.log(this.$parent);
   },
@@ -46,10 +43,21 @@ export default {
       });
     },
     destroyLike: function () {
-      axios.delete("/likes/" + this.filteredLikes.id + ".json").then((response) => {
+      console.log(this.filteredLikes);
+      axios.delete("/likes/" + this.filteredLikes[0].id + ".json").then((response) => {
         console.log("Unliked", response);
-        this.$router.push("/posts");
         this.isLiked = false;
+        this.post.likes = this.post.likes.filter((like) => {
+          return like.id !== this.filteredLikes[0].id;
+        });
+      });
+    },
+    destroyComment: function (comment) {
+      axios.delete("/comments/" + comment.id + ".json").then((response) => {
+        console.log("Comment erased successfully", response);
+        console.log("comment index", this.post.comments.indexOf(comment));
+        var commentIndex = this.post.comments.indexOf(comment);
+        this.post.comments.splice(commentIndex, 1);
       });
     },
     redirectToShow: function () {
@@ -69,7 +77,7 @@ export default {
         .post("/comments.json", this.newCommentParams)
         .then((response) => {
           console.log(response.data);
-          this.comments.push(response.data);
+          this.post.comments.push(response.data);
           this.newCommentParams.comment = "";
         })
         .catch((error) => {
@@ -81,9 +89,9 @@ export default {
     submitLike: function () {
       axios.post("/likes.json", this.newLikeParams).then((response) => {
         console.log(response.data);
-        this.likes.push(response.data);
-        this.newLikeParams = null;
+        this.post.likes.push(response.data);
         this.isLiked = true;
+        this.filteredLikes[0] = response.data;
       });
     },
   },
@@ -109,9 +117,9 @@ export default {
       <h5>{{ post.sign_type }}: {{ post.sign }}</h5>
       <div class="d-block mt-4 text-uppercase col-12">
         <p class="mb-3">
-          <button v-on:click="submitLike()" v-bind:disabled="isLiked" class="btn btn-outline-danger">♥</button>
+          <button v-on:click="submitLike()" v-if="!isLiked" class="btn btn-outline-danger">❤️</button>
+          <button v-on:click="destroyLike()" v-if="isLiked" class="btn btn-outline-dark">💔</button>
           {{ post.likes.length }} {{ likesToPlural() }}
-          <!-- <button v-on:click="destroyLike()" v-if="isLiked" class="btn btn-outline-dark">💔</button> -->
         </p>
       </div>
 
@@ -144,7 +152,7 @@ export default {
 
       <p>{{ post.comments.length }} {{ post.comments.length == isSingularComment ? "Comment:" : "Comments:" }}</p>
 
-      <div v-for="comment in comments" v-bind:key="comment.id" class="d-flex mb-4 justify-content-center">
+      <div v-for="comment in post.comments" v-bind:key="comment.id" class="d-flex mb-4 justify-content-center">
         <div class="comment d-flex">
           <div class="flex-shrink-0">
             <div class="avatar avatar-sm rounded-circle">
@@ -159,6 +167,9 @@ export default {
               {{ comment.comment }}
             </div>
             <span class="text-muted">{{ comment.user.created_at }}</span>
+            <div v-if="getUserId() == comment.user.id">
+              <button v-on:click="destroyComment(comment)">Delete comment</button>
+            </div>
           </div>
         </div>
       </div>

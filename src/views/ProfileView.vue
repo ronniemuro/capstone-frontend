@@ -107,7 +107,7 @@ export default {
         <!-- <p>
         profile bio
       </p> -->
-        <div class="d-block mb-2" v-for="post in posts" v-bind:key="post.id">
+        <div class="d-block mb-2" v-for="post in user.posts" v-bind:key="post.id">
           <div class="post-entry-1 border-bottom">
             <div class="author mb-0 d-block">
               <img
