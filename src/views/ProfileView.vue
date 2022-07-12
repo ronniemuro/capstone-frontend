@@ -19,6 +19,7 @@ export default {
     axios.get("/users/" + this.$route.params.id + ".json").then((response) => {
       console.log(response.data);
       this.user = response.data;
+      this.sortByMostRecentPosts();
       this.filteredRelationship = this.user.follower_relationships.filter(
         (follower_relationship) => follower_relationship.follower_id == this.getUserId()
       );
@@ -69,14 +70,24 @@ export default {
         });
       });
     },
-    destroyPost: function () {
-      axios.delete("/posts/" + this.post.id + ".json").then((response) => {
+    destroyPost: function (post) {
+      axios.delete("/posts/" + post.id + ".json").then((response) => {
         console.log("Successfully deleted", response);
-        this.$router.push(`/users/${this.user.id}`);
+        var postIndex = this.user.posts.indexOf(post);
+        this.user.posts.splice(postIndex, 1);
       });
     },
-    redirectToEdit: function () {
-      this.$router.push(`/posts/${this.post.id}/edit`);
+    redirectToEdit: function (post) {
+      this.$router.push(`/posts/${post.id}/edit`);
+    },
+    sortByMostRecentPosts: function () {
+      this.user.posts.sort((a, b) => {
+        var keyA = new Date(a.created_at);
+        var keyB = new Date(b.created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
     },
   },
 };
@@ -130,8 +141,8 @@ export default {
               <span>{{ post.sign }}</span>
             </div>
             <div v-if="getUserId() == user.id" class="col-sm mb-3">
-              <button v-on:click="redirectToEdit()" class="btn btn-outline-dark">Edit Post</button>
-              <button v-on:click="destroyPost()" class="btn btn-outline-danger">Delete Post</button>
+              <button v-on:click="redirectToEdit(post)" class="btn btn-outline-dark">Edit Post</button>
+              <button v-on:click="destroyPost(post)" class="btn btn-outline-danger">Delete Post</button>
             </div>
           </div>
         </div>

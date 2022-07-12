@@ -20,6 +20,7 @@ export default {
       axios.get("/posts.json").then((response) => {
         console.log(response.data);
         this.posts = response.data;
+        this.sortByMostRecentPosts();
       });
     },
     filterPosts: function () {
@@ -37,6 +38,15 @@ export default {
         } else {
           return true;
         }
+      });
+    },
+    sortByMostRecentPosts: function () {
+      this.posts.sort((a, b) => {
+        var keyA = new Date(a.created_at);
+        var keyB = new Date(b.created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
       });
     },
   },
