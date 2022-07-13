@@ -96,11 +96,11 @@ export default {
 <template>
   <div class="home">
     <div id="profile-view" class="d-flex justify-content-center" data-aos="fade-up">
-      <div class="col-lg-4 text-center mb-5">
+      <div class="col-lg-5 text-center mb-5">
         <p class="d-block mb-2 text-uppercase">
           {{ user.posts.length }} {{ user.posts.length == isSingularPost ? "Post" : "Posts" }}
         </p>
-        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle w-50 mb-4 width: 100px; height: 100px" />
+        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 250px; height: 250px" />
         <h3>{{ user.name }}</h3>
         <h3>@{{ user.username }}</h3>
         <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising }}</span>
@@ -132,7 +132,7 @@ export default {
               />
               {{ user.name }} @{{ user.username }}
             </div>
-            <h2 class="mb-4">
+            <h2 class="mb-4 mt-0">
               <h5>{{ post.post_content }}</h5>
             </h2>
             <div class="post-meta mb-4">
@@ -141,8 +141,8 @@ export default {
               <span>{{ post.sign }}</span>
             </div>
             <div v-if="getUserId() == user.id" class="col-sm mb-3">
-              <button v-on:click="redirectToEdit(post)" class="btn btn-outline-dark">Edit Post</button>
-              <button v-on:click="destroyPost(post)" class="btn btn-outline-danger">Delete Post</button>
+              <button v-on:click="redirectToEdit(post)" class="btn btn-outline-dark btn-sm me-1">Edit Post</button>
+              <button v-on:click="destroyPost(post)" class="btn btn-outline-danger btn-sm">Delete Post</button>
             </div>
           </div>
         </div>

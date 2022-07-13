@@ -20,7 +20,7 @@ export default {
         .patch("/posts/" + this.$route.params.id + ".json", this.post)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/posts/" + this.$route.params.id);
+          this.$router.back();
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

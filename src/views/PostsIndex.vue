@@ -7,8 +7,10 @@ export default {
       posts: [],
       signTypeFilter: "",
       signFilter: "",
+      resetFilter: "",
       isSingularLike: 1,
       isSingularComment: 1,
+      selected: undefined,
     };
   },
   created: function () {
@@ -55,15 +57,18 @@ export default {
 
 <template>
   <div class="home">
-    <div class="d-flex justify-content-center">
-      <div class="col-md-2 mb-3">
-        <select class="form-select d-block" required v-model="signTypeFilter">
+    <div class="d-flex justify-content-center mb-4">
+      <div class="d-inline">
+        <select class="form-select d-inline" required v-model="signTypeFilter">
           <option value="" disabled selected>Filter by the Big 3</option>
           <option value="Sun">Sun</option>
           <option value="Moon">Moon</option>
           <option value="Rising">Rising</option>
         </select>
-        <select class="form-select d-block" required v-model="signFilter">
+      </div>
+      <button v-on:click="signTypeFilter = ''" class="btn btn-light me-3">Reset</button>
+      <div class="d-inline">
+        <select class="form-select d-inline" required v-model="signFilter">
           <option value="" disabled selected>Filter by Sign</option>
           <option value="Aries">Aries</option>
           <option value="Taurus">Taurus</option>
@@ -79,14 +84,16 @@ export default {
           <option value="Pisces">Pisces</option>
         </select>
       </div>
+      <button v-on:click="signFilter = ''" class="btn btn-light">Reset</button>
     </div>
     <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center" data-aos="fade-up">
-      <div class="col-md-3">
+      <div class="col-6">
         <h3>
           <img
             v-bind:src="post.user.profile_pic"
             v-bind:alt="post.user.name"
             style="object-fit: fill; width: 90px; height: 80px; border: solid 1px #ccc"
+            class="me-2"
           />
           <router-link v-bind:to="`/users/${post.user.id}`" class="btn btn-light btn-lg">
             {{ post.user.name }} @{{ post.user.username }}

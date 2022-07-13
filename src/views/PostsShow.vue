@@ -161,15 +161,15 @@ export default {
           </div>
           <div class="flex-shrink-1 ms-2 ms-sm-3">
             <div class="comment-meta d-flex">
-              <h6 class="me-2">{{ comment.user.name }} @{{ comment.user.username }}</h6>
+              <h6 class="me-5">{{ comment.user.name }} @{{ comment.user.username }}</h6>
+              <div v-if="getUserId() == comment.user.id">
+                <button v-on:click="destroyComment(comment)" class="btn btn-outline-dark btn-sm">🗑️</button>
+              </div>
             </div>
             <div class="comment-body">
               {{ comment.comment }}
             </div>
             <span class="text-muted">{{ comment.user.created_at }}</span>
-            <div v-if="getUserId() == comment.user.id">
-              <button v-on:click="destroyComment(comment)">Delete comment</button>
-            </div>
           </div>
         </div>
       </div>

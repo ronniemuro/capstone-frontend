@@ -59,7 +59,7 @@ export default {
           </ul>
         </nav>
         <!-- .navbar -->
-        <div>
+        <div v-show="isLoggedIn">
           <div class="position-relative">
             <a href="" class="mx-2 js-search-open"><span class="bi-search"></span></a>
             <i class="bi bi-list mobile-nav-toggle"></i>

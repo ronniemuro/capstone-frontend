@@ -34,7 +34,7 @@ export default {
         <div class="container" data-aos="fade-up">
           <div class="row">
             <div class="col-sm text-center mb-3">
-              <h2>New Post</h2>
+              <h3>New Post</h3>
             </div>
           </div>
 
@@ -109,6 +109,7 @@ export default {
                 <textarea
                   class="form-control"
                   name="message"
+                  font-size="4rem"
                   rows="4"
                   placeholder="How are the planets aligning for you today?"
                   v-model="newPostParams.post_content"

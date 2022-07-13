@@ -121,7 +121,6 @@ export default {
                 name="subject"
                 id="subject"
                 placeholder="Profile Picture"
-                required
                 v-on:change="setFile($event)"
                 ref="fileInput"
               />
