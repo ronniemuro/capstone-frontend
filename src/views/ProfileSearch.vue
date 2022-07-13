@@ -36,13 +36,14 @@ export default {
     <h5 class="text-center mb-4">Results:</h5>
     <div v-for="user in users" v-bind:key="user.id" class="d-flex justify-content-center">
       <div class="post-entry-1 border-bottom col-6 mb-3">
-        <h2>
+        <h3>
           <div class="mb-0 text-center">
             <router-link v-bind:to="`/users/${user.id}`">
               <img
                 v-bind:src="user.profile_pic"
                 v-bind:alt="user.name"
-                style="object-fit: fill; width: 90px; height: 80px; border: solid 1px #ccc"
+                style="object-fit: fill; width: 90px; height: 80px; border: none #ccc"
+                class="me-1"
               />
 
               <h4 class="btn btn-light btn-lg">{{ user.name }} @{{ user.username }}</h4>
@@ -55,7 +56,7 @@ export default {
               <span>{{ user.rising }}</span>
             </div>
           </div>
-        </h2>
+        </h3>
       </div>
     </div>
   </div>

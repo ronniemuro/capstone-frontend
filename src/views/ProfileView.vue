@@ -100,7 +100,7 @@ export default {
         <p class="d-block mb-2 text-uppercase">
           {{ user.posts.length }} {{ user.posts.length == isSingularPost ? "Post" : "Posts" }}
         </p>
-        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 250px; height: 250px" />
+        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 200px; height: 190px" />
         <h3>{{ user.name }}</h3>
         <h3>@{{ user.username }}</h3>
         <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising }}</span>
@@ -123,19 +123,20 @@ export default {
         profile bio
       </p> -->
         <div class="d-block mb-2" v-for="post in user.posts" v-bind:key="post.id">
-          <div class="post-entry-1 border-bottom">
-            <div class="author mb-0 d-block">
+          <div class="post-entry-1 border-bottom mb-0">
+            <div class="author d-block">
               <img
                 v-bind:src="user.profile_pic"
                 v-bind:alt="user.name"
-                style="object-fit: fill; width: 50px; height: 50px; border: solid 1px #ccc"
+                style="object-fit: fill; width: 50px; height: 50px; border: none #ccc"
+                class="mb-0"
               />
-              {{ user.name }} @{{ user.username }}
+              <p class="mb-1">{{ user.name }} @{{ user.username }}</p>
             </div>
-            <h2 class="mb-4 mt-0">
+            <h2 class="mb-2">
               <h5>{{ post.post_content }}</h5>
             </h2>
-            <div class="post-meta mb-4">
+            <div class="post-meta mb-3">
               <span class="date">{{ post.sign_type }}</span>
               <span class="mx-1">&bullet;</span>
               <span>{{ post.sign }}</span>

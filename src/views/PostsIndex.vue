@@ -92,7 +92,7 @@ export default {
           <img
             v-bind:src="post.user.profile_pic"
             v-bind:alt="post.user.name"
-            style="object-fit: fill; width: 90px; height: 80px; border: solid 1px #ccc"
+            style="object-fit: fill; width: 90px; height: 80px; border: none #ccc"
             class="me-2"
           />
           <router-link v-bind:to="`/users/${post.user.id}`" class="btn btn-light btn-lg">

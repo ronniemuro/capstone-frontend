@@ -95,12 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   var swiper = new Swiper(".sliderFeaturedPosts", {
     spaceBetween: 0,
-    speed: 500,
+    speed: 1000,
     centeredSlides: true,
     loop: true,
     slideToClickedSlide: true,
     autoplay: {
-      delay: 3000,
+      delay: 11000,
       disableOnInteraction: false,
     },
     pagination: {

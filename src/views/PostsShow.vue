@@ -106,7 +106,7 @@ export default {
         <img
           v-bind:src="post.user.profile_pic"
           v-bind:alt="post.user.name"
-          style="object-fit: fill; width: 90px; height: 80px; border: solid 1px #ccc"
+          style="object-fit: fill; width: 90px; height: 80px; border: none #ccc"
         />
         <router-link v-bind:to="`/users/${post.user.id}`" class="btn btn-light btn-lg">
           {{ post.user.name }} @{{ post.user.username }}
@@ -124,7 +124,7 @@ export default {
       </div>
 
       <div v-if="getUserId() == post.user.id" class="col-sm">
-        <button v-on:click="redirectToEdit()" class="btn btn-outline-dark">Edit Post</button>
+        <button v-on:click="redirectToEdit()" class="btn btn-outline-dark me-2">Edit Post</button>
         <button v-on:click="destroyPost()" class="btn btn-outline-danger">Delete Post</button>
       </div>
       <div class="row justify-content-center mt-1">
@@ -142,8 +142,8 @@ export default {
                   v-model="newCommentParams.comment"
                 ></textarea>
               </div>
-              <div class="d-block mb-3 text-uppercase col-12">
-                <input type="submit" class="btn btn-primary" value="Post comment" />
+              <div class="d-block text-uppercase col-12 border-bottom mb-2">
+                <input type="submit" class="btn btn-primary mb-3" value="Post comment" />
               </div>
             </form>
           </div>
@@ -160,7 +160,7 @@ export default {
             </div>
           </div>
           <div class="flex-shrink-1 ms-2 ms-sm-3">
-            <div class="comment-meta d-flex">
+            <div class="comment-meta d-flex justify-content-between">
               <h6 class="me-5">{{ comment.user.name }} @{{ comment.user.username }}</h6>
               <div v-if="getUserId() == comment.user.id">
                 <button v-on:click="destroyComment(comment)" class="btn btn-outline-dark btn-sm">🗑️</button>
@@ -169,7 +169,7 @@ export default {
             <div class="comment-body">
               {{ comment.comment }}
             </div>
-            <span class="text-muted">{{ comment.user.created_at }}</span>
+            <span class="text-muted">{{ new Date(comment.user.created_at) }}</span>
           </div>
         </div>
       </div>
