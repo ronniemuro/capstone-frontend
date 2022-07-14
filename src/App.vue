@@ -28,7 +28,7 @@ export default {
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
-          <img src="assets/img/astrological.png" alt="" />
+          <img src="assets/img/zodiac-2.png" alt="" />
           <h1>Synastry</h1>
         </a>
         <nav id="navbar" class="navbar">
