@@ -28,29 +28,14 @@ export default {
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt="" /> -->
+          <img src="assets/img/astrological.png" alt="" />
           <h1>Synastry</h1>
         </a>
-
         <nav id="navbar" class="navbar">
           <ul>
             <li v-if="isLoggedIn">
               <a href="/posts">Feed</a>
             </li>
-            <!-- <li class="dropdown" v-if="isLoggedIn"> -->
-            <!-- <a href="/posts"> -->
-            <!-- <span>Feed</span> -->
-            <!-- <i class="bi bi-chevron-down dropdown-indicator"></i> -->
-            <!-- </a> -->
-            <!-- <ul> -->
-
-            <!-- <li class="dropdown"></li> -->
-            <!-- <li><a href="/posts">All Posts</a></li> -->
-            <!-- <li><a href="/posts/sun">Sun Posts</a></li> -->
-            <!-- <li><a href="#">Moon Posts</a></li> -->
-            <!-- <li><a href="#">Rising Posts</a></li> -->
-            <!-- </ul> -->
-            <!-- </li> -->
             <li v-if="isLoggedIn"><a href="/posts/new">New Post</a></li>
             <li v-if="isLoggedIn"><router-link v-bind:to="`/users/${getUserId()}`">My Profile</router-link></li>
             <li v-if="isLoggedIn"><a href="/logout">Logout</a></li>
