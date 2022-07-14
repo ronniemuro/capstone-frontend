@@ -13,6 +13,7 @@ export default {
       isSingularComment: 1,
       isSingularPost: 1,
       filteredRelationship: [],
+      noRising: "undefined",
     };
   },
   created: function () {
@@ -103,7 +104,9 @@ export default {
         <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 200px; height: 190px" />
         <h3>{{ user.name }}</h3>
         <h3>@{{ user.username }}</h3>
-        <span class="d-block mb-2 text-uppercase">☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising }}</span>
+        <span class="d-block mb-2 text-uppercase">
+          ☉: {{ user.sun }} | ☾: {{ user.moon }} | ↑: {{ user.rising == noRising ? "N/A" : user.rising }}
+        </span>
         <span class="d-block mb-3 text-lowercase">
           {{ user.leader_relationships.length }} Following | {{ user.follower_relationships.length }}
           {{ followersToPlural() }} | {{ user.likes.length }} {{ likesToPlural() }}

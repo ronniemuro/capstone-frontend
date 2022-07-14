@@ -5,6 +5,7 @@ export default {
     return {
       users: [],
       isLoggedIn: false,
+      noRising: "undefined",
     };
   },
   props: ["searchTerm"],
@@ -53,7 +54,7 @@ export default {
               <span class="mx-1">&bullet;</span>
               <span>{{ user.moon }}</span>
               <span class="mx-1">&bullet;</span>
-              <span>{{ user.rising }}</span>
+              <span>{{ user.rising == noRising ? "N/A" : user.rising }}</span>
             </div>
           </div>
         </h3>

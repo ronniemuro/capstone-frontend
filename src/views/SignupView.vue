@@ -193,7 +193,7 @@ export default {
                 <label for="floatingSelectGrid">Moon</label>
               </div>
               <div class="form-floating col-sm">
-                <select class="form-select" id="floatingSelectGrid" required v-model="newUserParams.rising">
+                <select class="form-select" id="floatingSelectGrid" v-model="newUserParams.rising">
                   <option value="" disabled selected>Please choose your Rising sign...</option>
                   <option value="Aries">Aries</option>
                   <option value="Taurus">Taurus</option>
