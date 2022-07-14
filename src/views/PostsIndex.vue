@@ -66,7 +66,7 @@ export default {
           <option value="Rising">Rising</option>
         </select>
       </div>
-      <button v-on:click="signTypeFilter = ''" class="btn btn-light me-3">Reset</button>
+      <button v-on:click="signTypeFilter = ''" class="btn btn-light me-3">Clear</button>
       <div class="d-inline">
         <select class="form-select d-inline" required v-model="signFilter">
           <option value="" disabled selected>Filter by Sign</option>
@@ -84,7 +84,7 @@ export default {
           <option value="Pisces">Pisces</option>
         </select>
       </div>
-      <button v-on:click="signFilter = ''" class="btn btn-light">Reset</button>
+      <button v-on:click="signFilter = ''" class="btn btn-light">Clear</button>
     </div>
     <div v-for="post in filterPosts()" v-bind:key="post.id" class="d-flex justify-content-center" data-aos="fade-up">
       <div class="col-6">
@@ -108,12 +108,13 @@ export default {
           <h2 class="mb-2">
             <h4>{{ post.post_content }}</h4>
           </h2>
-          <span class="author mb-3 d-block">
+          <span class="author mb-0 d-block">
             <h5>
               {{ post.likes.length }} {{ post.likes.length == isSingularLike ? "Like" : "Likes" }} :
               {{ post.comments.length }} {{ post.comments.length == isSingularComment ? "Comment" : "Comments" }}
             </h5>
           </span>
+          <p class="text-muted">{{ new Date(post.created_at).toDateString() }}</p>
           <router-link v-bind:to="`/posts/${post.id}`" class="mb-3 btn btn-outline-dark">More...</router-link>
         </div>
       </div>

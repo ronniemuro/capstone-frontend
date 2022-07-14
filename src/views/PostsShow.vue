@@ -67,7 +67,7 @@ export default {
       this.$router.push(`/posts/${this.post.id}/edit`);
     },
     redirectToFeed: function () {
-      this.$router.push("/posts");
+      this.$router.back();
     },
     getUserId: function () {
       return localStorage.getItem("user_id");
@@ -102,7 +102,9 @@ export default {
   <div class="home">
     <div data-aos="fade-up">
       <h4>
-        <p><button type="button" class="btn btn-light" v-on:click="redirectToFeed()">Back to feed..</button></p>
+        <p>
+          <button type="button" class="btn btn-outline-dark" v-on:click="redirectToFeed()">Back..</button>
+        </p>
         <img
           v-bind:src="post.user.profile_pic"
           v-bind:alt="post.user.name"
@@ -115,6 +117,7 @@ export default {
 
       <h2>{{ post.post_content }}</h2>
       <h5>{{ post.sign_type }}: {{ post.sign }}</h5>
+      <p class="text-muted">{{ new Date(post.created_at).toDateString() }}</p>
       <div class="d-block mt-4 text-uppercase col-12">
         <p class="mb-3">
           <button v-on:click="submitLike()" v-if="!isLiked" class="btn btn-outline-danger">❤️</button>
@@ -153,23 +156,30 @@ export default {
       <p>{{ post.comments.length }} {{ post.comments.length == isSingularComment ? "Comment:" : "Comments:" }}</p>
 
       <div v-for="comment in post.comments" v-bind:key="comment.id" class="d-flex mb-4 justify-content-center">
-        <div class="comment d-flex">
-          <div class="flex-shrink-0">
-            <div class="avatar avatar-sm rounded-circle">
-              <img class="avatar-img" v-bind:src="comment.user.profile_pic" v-bind:alt="comment.user.name" />
-            </div>
-          </div>
+        <div class="comment col-sm-3">
           <div class="flex-shrink-1 ms-2 ms-sm-3">
-            <div class="comment-meta d-flex justify-content-between">
-              <h6 class="me-5">{{ comment.user.name }} @{{ comment.user.username }}</h6>
-              <div v-if="getUserId() == comment.user.id">
-                <button v-on:click="destroyComment(comment)" class="btn btn-outline-dark btn-sm">🗑️</button>
+            <div class="comment-meta d-inline">
+              <div class="mb-2">
+                <img
+                  v-bind:src="comment.user.profile_pic"
+                  v-bind:alt="comment.user.name"
+                  style="object-fit: fill; width: 50px; height: 40px; border: none #ccc"
+                  class="me-2"
+                />
+                <router-link v-bind:to="`/users/${comment.user.id}`" class="btn btn-light btn-sm">
+                  <div class="text-center">{{ comment.user.name }} @{{ comment.user.username }}</div>
+                </router-link>
               </div>
             </div>
-            <div class="comment-body">
+            <div class="comment-body mb-2">
               {{ comment.comment }}
             </div>
-            <span class="text-muted">{{ new Date(comment.user.created_at) }}</span>
+            <div class="border-bottom">
+              <span class="text-muted">{{ new Date(comment.user.created_at).toDateString() }}</span>
+              <div v-if="getUserId() == comment.user.id">
+                <button v-on:click="destroyComment(comment)" class="btn btn-outline-dark btn-sm mt-1 mb-2">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
