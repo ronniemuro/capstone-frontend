@@ -101,7 +101,7 @@ export default {
         <p class="d-block mb-2 text-uppercase">
           {{ user.posts.length }} {{ user.posts.length == isSingularPost ? "Post" : "Posts" }}
         </p>
-        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 200px; height: 190px" />
+        <img v-bind:src="user.profile_pic" class="img-fluid rounded-circle mb-2" style="width: 215px; height: 190px" />
         <h3>{{ user.name }}</h3>
         <h3>@{{ user.username }}</h3>
         <span class="d-block mb-2 text-uppercase">
