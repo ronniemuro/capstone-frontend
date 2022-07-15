@@ -145,9 +145,21 @@ export default {
               <span>{{ post.sign }}</span>
             </div>
             <p class="text-muted">{{ new Date(post.created_at).toDateString() }}</p>
-            <div v-if="getUserId() == user.id" class="col-sm mb-3">
-              <button v-on:click="redirectToEdit(post)" class="btn btn-outline-dark btn-sm me-1">Edit Post</button>
-              <button v-on:click="destroyPost(post)" class="btn btn-outline-danger btn-sm me-1">Delete Post</button>
+            <div class="col-sm mb-2">
+              <button
+                v-if="getUserId() == user.id"
+                v-on:click="redirectToEdit(post)"
+                class="btn btn-outline-dark btn-sm me-1"
+              >
+                Edit Post
+              </button>
+              <button
+                v-if="getUserId() == user.id"
+                v-on:click="destroyPost(post)"
+                class="btn btn-outline-danger btn-sm me-1"
+              >
+                Delete Post
+              </button>
               <router-link v-bind:to="`/posts/${post.id}`" class="btn btn-outline-dark btn-sm">More..</router-link>
             </div>
           </div>
