@@ -105,8 +105,8 @@ export default {
             <span class="mx-1">&bullet;</span>
             <span>{{ post.sign }}</span>
           </div>
-          <h2 class="mb-2">
-            <h4>{{ post.post_content }}</h4>
+          <h2 class="d-flex justify-content-center mb-1">
+            <h4 class="col-md-8">{{ post.post_content }}</h4>
           </h2>
           <span class="author mb-0 d-block">
             <h5>

@@ -114,8 +114,9 @@ export default {
           {{ post.user.name }} @{{ post.user.username }}
         </router-link>
       </h4>
-
-      <h2>{{ post.post_content }}</h2>
+      <div class="d-flex justify-content-center">
+        <h3 class="col-md-4">{{ post.post_content }}</h3>
+      </div>
       <h5>{{ post.sign_type }}: {{ post.sign }}</h5>
       <p class="text-muted">{{ new Date(post.created_at).toDateString() }}</p>
       <div class="d-block mt-4 text-uppercase col-12">

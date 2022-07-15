@@ -136,8 +136,8 @@ export default {
               />
               <p class="mb-1">{{ user.name }} @{{ user.username }}</p>
             </div>
-            <h2 class="mb-2">
-              <h5>{{ post.post_content }}</h5>
+            <h2 class="d-flex justify-content-center mb-2">
+              <h5 class="col-md-8">{{ post.post_content }}</h5>
             </h2>
             <div class="post-meta mb-1">
               <span class="date">{{ post.sign_type }}</span>
