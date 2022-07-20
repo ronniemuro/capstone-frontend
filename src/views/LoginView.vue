@@ -83,6 +83,7 @@ export default {
                 />
               </div>
             </div>
+            <div class="text-center mt-2"><p>Test login: (email: test@test.com | password: password)</p></div>
             <div class="my-3">
               <div class="loading">Loading</div>
               <div class="error-message"></div>

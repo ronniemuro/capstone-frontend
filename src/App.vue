@@ -25,10 +25,10 @@ export default {
   <div id="app">
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
-      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <div class="container-fixed container-xl d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
-          <img src="assets/img/zodiac-2.png" alt="" />
+          <!-- <img src="assets/img/zodiac-2.png" alt="" /> -->
           <h1>Synastry</h1>
         </a>
         <nav id="navbar" class="navbar">
@@ -45,7 +45,7 @@ export default {
         </nav>
         <!-- .navbar -->
         <div v-show="isLoggedIn">
-          <div class="position-relative">
+          <div class="position-fixed">
             <a href="" class="mx-2 js-search-open"><span class="bi-search"></span></a>
             <i class="bi bi-list mobile-nav-toggle"></i>
 
@@ -76,7 +76,7 @@ export default {
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
       <div class="footer-content">
-        <div class="container">
+        <div class="container position:fixed">
           <div class="row g-3">
             <div class="col-lg-4" v-if="!isLoggedIn">
               <h3 class="footer-heading">About Synastry</h3>
