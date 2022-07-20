@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcapstone_frontend"]=self["webpackChunkcapstone_frontend"]||[]).push([[443],{7381:function(n,t,e){e.r(t),e.d(t,{default:function(){return d}});var a=e(3396);const r={class:"about"},s=(0,a._)("h1",null,"This is an about page",-1),u=[s];function c(n,t){return(0,a.wg)(),(0,a.iD)("div",r,u)}var o=e(89);const f={},i=(0,o.Z)(f,[["render",c]]);var d=i}}]);
+//# sourceMappingURL=about.f5be95f0.js.map
