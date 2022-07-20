@@ -3,7 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "https://synastry-backend.herokuapp.com" : "/";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://synastry-backend.herokuapp.com/";
 
 var jwt = localStorage.getItem("jwt");
 if (jwt) {
